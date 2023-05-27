@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>USER by D</title>
+    <title>USER by ID</title>
 </head>
 <body>
 
@@ -15,6 +15,7 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
         <td th:text="${user.id}"></td>
         <td th:text="${user.name}"></td>
         <td th:text="${user.age}"></td>
@@ -22,6 +23,10 @@
     </tbody>
 </table>
 <a th:href="@{/read/all}" >users</a>
+<br/>
+<form th:method="POST" th:action="@{/read/delite/{id}(id=${user.id})}">
+    <input type="submit" value="Delite!"/>
+</form>
 
 
 </body>

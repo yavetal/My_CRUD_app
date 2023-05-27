@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All Users</title>
 </head>
 <body>
+<form>
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Age</th>
-        <th>Link</th>
+        <th>LinkUser</th>
+        <th>delite!</th>
     </tr>
     </thead>
     <tbody>
@@ -20,8 +22,23 @@
         <td th:text="${users.name}"></td>
         <td th:text="${users.age}"></td>
         <td><a th:href="@{/read/{id}(id=${users.getId()})}" th:text="${users.getName()}">user</a></td>
+        <td>
+            <form th:method="POST" th:action="@{/read/delite/{id}(id=${users.id})}">
+            <input type="submit" value="Delite!"/>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
+</form>
+<form>
+    <br/>
+    <h3>Create new user</h3>
+    <form th:method="GET" th:action="@{/read/new}">
+        <input type="submit" value="Create!"/>
+    </form>
+</form>
+
+
 </body>
 </html>
