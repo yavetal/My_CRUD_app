@@ -1,9 +1,7 @@
 package users;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +20,7 @@ public class UserController {
     public String all(Model model) {
         List<Users> all = userRepository.findAll();
         System.out.println(all);
-        model.addAttribute("users", all);
+        model.addAttribute(Constants.MODEL_ATTRIBUTE_NAME, all);
         return "all";
     }
 
@@ -32,13 +30,13 @@ public class UserController {
         Optional<Users> optionalUser = userRepository.findById(id);
         Users user = optionalUser.get();
         System.out.println(user);
-        model.addAttribute("user", user);
+        model.addAttribute(Constants.MODEL_ATTRIBUTE_NAME, user);
         return "id";
     }
 
     @GetMapping("/new")
     public String newUser(Model model) {
-        model.addAttribute("user", new Users());
+        model.addAttribute(Constants.MODEL_ATTRIBUTE_NAME, new Users());
         return "new";
     }
 
@@ -48,10 +46,10 @@ public class UserController {
         return "redirect:/read/all";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/edit/{id}")
     @Transactional
     public String editUser(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userRepository.findById(id).get());
+        model.addAttribute(Constants.MODEL_ATTRIBUTE_NAME, userRepository.findById(id).get());
         System.out.println(userRepository.findById(id).get());
         return "edit";
     }
@@ -63,8 +61,8 @@ public class UserController {
 
     }
 
-    @PostMapping("/delite/{id}")
-    public String deliteUserr(@PathVariable("id") Long id) {
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
 
         System.out.println(id.toString());
         userRepository.delete(userRepository.findById(id).get());

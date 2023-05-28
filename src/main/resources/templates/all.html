@@ -14,17 +14,23 @@
         <th>Age</th>
         <th>LinkUser</th>
         <th>DeleteUser</th>
+        <td>UpdateUser</td>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="users : ${users}">
-        <td th:text="${users.id}"></td>
-        <td th:text="${users.name}"></td>
-        <td th:text="${users.age}"></td>
-        <td><a th:href="@{/read/{id}(id=${users.getId()})}" th:text="${users.getName()}">user</a></td>
+    <tr th:each="user : ${user}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.age}"></td>
+        <td><a th:href="@{/read/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a></td>
         <td>
-            <form th:method="POST" th:action="@{/read/delite/{id}(id=${users.id})}">
+            <form th:method="POST" th:action="@{/read/delete/{id}(id=${user.id})}">
             <input type="submit" value="Delete!"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="GET" th:action="@{/read/edit/{id}(id=${user.id})}">
+                <input type="submit" value="Update!"/>
             </form>
         </td>
     </tr>
